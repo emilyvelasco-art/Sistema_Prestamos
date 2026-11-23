@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
+
 class PrestamosRequest extends FormRequest
 {
     /**
@@ -12,7 +13,7 @@ class PrestamosRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,7 +24,10 @@ class PrestamosRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'equipo_id' => ['required', 'exists:equipos,id'],
+            'usuario' => ['required', 'string', 'max:255'],
+            'fecha_prestamo' => ['required', 'date'],
+            'fecha_devolucion' => ['nullable', 'date'],
         ];
     }
 }

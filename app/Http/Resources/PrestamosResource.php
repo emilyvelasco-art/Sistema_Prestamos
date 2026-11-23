@@ -7,6 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use App\Models\Prestamos;
 use App\Models\Equipos;
 
+
 class PrestamosResource extends JsonResource
 {
     /**
