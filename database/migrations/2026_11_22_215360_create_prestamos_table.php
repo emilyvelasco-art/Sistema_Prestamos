@@ -1,0 +1,36 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        // Crear una tabla para almacenar los pagos de los prestamos
+        Schema::create('prestamos', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('equipo_id')
+                ->constrained('equipos')
+                ->cascadeOnUpdate()
+                ->restrictOnDelete();
+            $table->string('nombre_solicitante', 100);
+            $table->date('fecha_prestamo');
+            $table->date('fecha_devolucion')->nullable();
+            $table->string('estado', 20)->default('pendiente'); // pendiente, devuelto, retrasado   
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('prestamos');
+    }
+};
